@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "265159548006",
+    "firebase_url": "https://doroapp-7cbc4.firebaseio.com",
+    "project_id": "doroapp-7cbc4",
+    "storage_bucket": "doroapp-7cbc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265159548006:android:fc7f67cf36ad3db8",
+        "android_client_info": {
+          "package_name": "no.oivheg.DoroApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265159548006-b2n3j6oiud9l9b87p3qthluehrdgotui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "no.oivheg.DoroApp",
+            "certificate_hash": "4b482b741286df3d2162719a8f62e630efccb2d8"
+          }
+        },
+        {
+          "client_id": "265159548006-5egf8b844n8p6ak3hjpdr9piontu2g6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjfrzyFNxNdMtW5sJZwxFhkowl2nJoNjA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265159548006-5egf8b844n8p6ak3hjpdr9piontu2g6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
