@@ -1,6 +1,12 @@
 package no.oivheg.DoroApp.FCM;
 
+import android.bluetooth.BluetoothClass;
+import android.content.DialogInterface;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -14,6 +20,7 @@ import static android.content.ContentValues.TAG;
 public class FirebaseMessaging extends FirebaseMessagingService {
 
     private static String DeviceToken;
+
 
     public static String getDeviceToken() {
         return DeviceToken;
@@ -29,9 +36,11 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
         DeviceToken = token;
 
+        MainActivity.getInstace().SetToken(DeviceToken);
 
-        MainActivity.SetToken(token);
-        User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
+
+     //   MainActivity.SetToken(DeviceToken);
+       // User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
@@ -41,7 +50,10 @@ public class FirebaseMessaging extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // ...
+if (MainActivity.getInstace().Freeze){
+    return;
 
+}
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
@@ -65,8 +77,9 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 //            String tmp = BatteryChecker.GetBattery();
-            User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
+            User.CreateUser(DeviceToken,User.DeviceName ,BatteryChecker.GetBattery());
         }
+
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.

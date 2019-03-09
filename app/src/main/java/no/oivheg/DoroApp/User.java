@@ -15,10 +15,10 @@ import static android.content.ContentValues.TAG;
 
 public class User {
 
-
-    public static void CreateUser(String DeviceToken, String battery) {
+  public static  String  DeviceName;
+    public static void CreateUser(String DeviceToken,String DvName, String battery) {
 //TODO add devicename based on input from 1 run.
-        String DeviceName = "2Device";
+         DeviceName = DvName;
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
         user.put("DeviceName", DeviceName);
