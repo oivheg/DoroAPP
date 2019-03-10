@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 EditText DvName = findViewById(R.id.DeviceName);
-                User.CreateUser(token.getText().toString(), DvName.getText().toString(), BatteryChecker.GetBattery());
+                User.CreateUser(token.getText().toString(), DvName.getText().toString(), BatteryChecker.GetBattery(), true);
 
             }
         });
@@ -103,13 +103,17 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 if (Freeze){
                     btnFreeze.setText("UnFreeze");
+
                     Freeze = false;
+
                 }else{
+
                     Freeze = true;
                     btnFreeze.setText("Freeze");
+
                 }
 
-
+                User.CreateUser(null,User.DeviceName ,BatteryChecker.GetBattery(), Freeze);
 
             }
         });

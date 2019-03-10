@@ -77,7 +77,7 @@ if (MainActivity.getInstace().Freeze){
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 //            String tmp = BatteryChecker.GetBattery();
-            User.CreateUser(DeviceToken,User.DeviceName ,BatteryChecker.GetBattery());
+            User.CreateUser(DeviceToken,User.DeviceName ,BatteryChecker.GetBattery(), true);
         }
 
 

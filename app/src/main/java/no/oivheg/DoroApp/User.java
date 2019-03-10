@@ -16,7 +16,7 @@ import static android.content.ContentValues.TAG;
 public class User {
 
   public static  String  DeviceName;
-    public static void CreateUser(String DeviceToken,String DvName, String battery) {
+    public static void CreateUser(String DeviceToken,String DvName, String battery, boolean resp) {
 //TODO add devicename based on input from 1 run.
          DeviceName = DvName;
         // Create a new user with a first and last name
@@ -31,7 +31,7 @@ public class User {
         } else {
             user.put("BatteryStatus", battery);
         }
-
+        user.put("Responding", resp);
         DocumentReference db = FirebaseFirestore.getInstance().document("Users/" + DeviceName);
 
         db.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
