@@ -12,6 +12,8 @@ public class BatteryChecker {
         public void onReceive(Context context, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             battery = String.valueOf(level) + '%';
+
+            MainActivity.battery.setText(String.valueOf(battery ));
         }
     };
 
