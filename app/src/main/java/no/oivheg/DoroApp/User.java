@@ -1,13 +1,15 @@
 package no.oivheg.DoroApp;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,21 +18,28 @@ import static android.content.ContentValues.TAG;
 public class User {
 
 
-    public static void CreateUser(String DeviceToken, String battery) {
+    public static void CreateUser(String DeviceToken, String battery, String DeviceName, String MasterId) {
+
+
+
+
+
 //TODO add devicename based on input from 1 run.
-        String DeviceName = "2Device";
+//        String DeviceName = "FredagDevice";
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
         user.put("DeviceName", DeviceName);
         if (DeviceToken != null) {
             user.put("DeviceToken", DeviceToken);
         }
-        user.put("DeviceMaster", "Master");
+        user.put("DeviceMaster", MasterId);
         if (battery.isEmpty()) {
             user.put("BatteryStatus", 0);
         } else {
             user.put("BatteryStatus", battery);
         }
+        user.put("Responding", true);
+        user.put("RespTime", new Date());
 
         DocumentReference db = FirebaseFirestore.getInstance().document("Users/" + DeviceName);
 
@@ -50,21 +59,6 @@ public class User {
 
         ;
 
-//        db.collection("users")
-//                .add(user)
-//
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error adding document", e);
-//                    }
-//                });
 
     }
 }

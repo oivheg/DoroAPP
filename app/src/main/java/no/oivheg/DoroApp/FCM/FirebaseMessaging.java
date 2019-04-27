@@ -5,9 +5,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import no.oivheg.DoroApp.BatteryChecker;
 import no.oivheg.DoroApp.MainActivity;
-import no.oivheg.DoroApp.User;
 
 import static android.content.ContentValues.TAG;
 
@@ -31,7 +29,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
 
 
         MainActivity.SetToken(token);
-        User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
+//       User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
@@ -65,7 +63,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 //            String tmp = BatteryChecker.GetBattery();
-            User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
+//            User.CreateUser(DeviceToken, BatteryChecker.GetBattery());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
