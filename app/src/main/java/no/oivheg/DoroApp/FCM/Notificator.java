@@ -1,14 +1,16 @@
 package no.oivheg.DoroApp.FCM;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import no.oivheg.DoroApp.BatteryChecker;
 import no.oivheg.DoroApp.User;
 
 
@@ -23,12 +25,24 @@ public class Notificator extends Worker {
         super(context, workerParams);
     }
 
+    public static int getBatteryPercentage(Context context) {
+
+        IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, iFilter);
+
+        int level = batteryStatus != null ? batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : -1;
+        int scale = batteryStatus != null ? batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : -1;
+
+        float batteryPct = level / (float) scale;
+
+        return (int) (batteryPct * 100);
+    }
+
     @NonNull
     @Override
     public Result doWork() {
 
 
-//
 //        String DeviceName = getInputData().getString(Notificator.DeviceName);
 //        String DeviceMaster = getInputData().getString(Notificator.DeviceMaster);
 //        String Token = getInputData().getString(Notificator.Token);
@@ -40,9 +54,12 @@ public class Notificator extends Worker {
         String Token = preferences.getString("Token", "defaultToken");
         String Battery = preferences.getString("Battery", "defaulBatteryt");
 
+        int IntBattery = getBatteryPercentage(getApplicationContext());
+
+        Battery = String.valueOf(IntBattery);
 
         if (!DeviceName.equals("defaultName")) {
-            User.CreateUser(Token, BatteryChecker.GetBattery(), DeviceName, DeviceMaster);
+            User.CreateUser(Token, "Battery: " + Battery + "%", DeviceName, DeviceMaster);
 
             return Result.success();
         }

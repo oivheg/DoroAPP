@@ -21,9 +21,6 @@ public class User {
     public static void CreateUser(String DeviceToken, String battery, String DeviceName, String MasterId) {
 
 
-
-
-
 //TODO add devicename based on input from 1 run.
 //        String DeviceName = "FredagDevice";
         // Create a new user with a first and last name

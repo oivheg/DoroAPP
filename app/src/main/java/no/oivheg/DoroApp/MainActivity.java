@@ -75,7 +75,11 @@ public class MainActivity extends AppCompatActivity {
         MasterID = this.findViewById(R.id.MasterId);
 
 
-
+        if (mPreferences.getString("Registered", "false").equals("true")) {
+            DeviceName.setEnabled(false);
+            MasterID.setEnabled(false);
+            btn.setEnabled(false);
+        }
 
 
         context = getApplicationContext();
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "2");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-        this.registerReceiver(BatteryChecker.mBatInfoREceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
         battery.setText(String.valueOf(BatteryChecker.GetBattery()));
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -95,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
 
                 btn.setEnabled(false);
-
 
 
             }
@@ -121,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         mEditor.putString("DeviceName", DeviceName.getText().toString()); // s
         mEditor.putString("Token", token.getText().toString()); // s
         mEditor.putString("Battery", BatteryChecker.GetBattery()); // s
+        mEditor.putString("Registered", "true");
 
         mEditor.commit();
 
@@ -152,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        this.registerReceiver(BatteryChecker.mBatInfoREceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         // Check if user is signed in (non-null) and update UI accordingly.
         if (mAuth != null) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -161,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
     private void logInUser() {

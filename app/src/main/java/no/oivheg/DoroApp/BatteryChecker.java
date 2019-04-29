@@ -13,7 +13,7 @@ public class BatteryChecker {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             battery = String.valueOf(level) + '%';
 
-            MainActivity.battery.setText(String.valueOf(battery ));
+            MainActivity.battery.setText(battery);
         }
     };
 
